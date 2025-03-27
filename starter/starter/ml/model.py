@@ -1,8 +1,10 @@
 from sklearn.metrics import fbeta_score, precision_score, recall_score
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import RandomForestRegressor
 
 
 # Optional: implement hyperparameter tuning.
-def train_model(X_train, y_train):
+def train_model(X_train, y_train, model_type="classifier", n_estimators=100, random_state=42):
     """
     Trains a machine learning model and returns it.
 
@@ -12,13 +14,20 @@ def train_model(X_train, y_train):
         Training data.
     y_train : np.array
         Labels.
+    model_type (str):
     Returns
     -------
     model
         Trained machine learning model.
     """
-
-    pass
+    if model_type=="classifier":
+        model = RandomForestClassifier(n_estimators=n_estimators, random_state=random_state)
+    elif model_type == "regressor":
+        model=RandomForestRegressor(n_estimators=n_estimators, random_state=random_state)
+    else:
+        raise ValueError("Ungültiger model_type. Wähle 'classifier' oder 'regressor'.")
+    model.fit(X_train, y_train)
+    return model
 
 
 def compute_model_metrics(y, preds):
@@ -57,4 +66,7 @@ def inference(model, X):
     preds : np.array
         Predictions from the model.
     """
-    pass
+    if not isinstance(model, (RandomForestClassifier, RandomForestRegressor)):
+        raise ValueError("Das übergebene Modell ist kein gültiges RandomForrest Model")
+    predictions = model.predict(X)
+    return predictions
