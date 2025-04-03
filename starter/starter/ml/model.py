@@ -2,7 +2,7 @@ from sklearn.metrics import fbeta_score, precision_score, recall_score
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.linear_model import LogisticRegression
-from data import process_data
+from .data import process_data
 
 
 # Optional: implement hyperparameter tuning.
