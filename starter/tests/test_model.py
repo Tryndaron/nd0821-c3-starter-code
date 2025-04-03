@@ -2,7 +2,7 @@ import pytest
 import numpy as np
 from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier
 from sklearn.datasets import make_classification, make_regression
-from starter.ml.model import inference, train_lr_model
+from ..starter.ml.model import inference, train_lr_model
 
 @pytest.fixture
 def classification_data():
