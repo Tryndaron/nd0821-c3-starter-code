@@ -2,7 +2,7 @@ import pytest
 import numpy as np
 from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier
 from sklearn.datasets import make_classification, make_regression
-from model import inference, train_model
+from starter.starter.ml.model import inference, train_lr_model
 
 @pytest.fixture
 def classification_data():
@@ -21,21 +21,21 @@ def regression_data():
 
 def test_train_classification(classification_data):
     X_train, y_train = classification_data
-    model = train_model(X_train, y_train, model_type="classifier")
+    model = train_lr_model(X_train, y_train, model_type="classifier")
     assert isinstance(model, RandomForestClassifier)
     assert hasattr(model, "predict")
 
 
 def test_train_regression(regression_data):
     X_train, y_train = regression_data
-    model = train_model(X_train, y_train, model_type="classifier")
+    model = train_lr_model(X_train, y_train, model_type="classifier")
     assert isinstance(model, RandomForestClassifier)
     assert hasattr(model, "predict")
 
 
 def test_inference_classification(classification_data):
     X_train, y_train, X_test = classification_data
-    model = train_model(X_train, y_train, model_type="classifier")
+    model = train_lr_model(X_train, y_train, model_type="classifier")
     predictions = inference(model, X_test)
 
     assert isinstance(predictions, np.ndarray)
@@ -43,7 +43,7 @@ def test_inference_classification(classification_data):
 
 def test_inference_regression(regression_data):
     X_train, y_train, X_test = regression_data
-    model = train_model(X_train, y_train, model_type="regressor")
+    model = train_lr_model(X_train, y_train, model_type="regressor")
     predictions = inference(model, X_test)
 
     assert isinstance(predictions, np.ndarray)
