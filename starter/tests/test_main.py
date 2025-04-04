@@ -9,17 +9,18 @@ client = TestClient(app)
 def test_root_message():
     resp = client.get('/')
     assert resp.status_code == 200
-    assert resp.json() == "message: Welcome to my first API ! You can get an inference from"
-    " a machine learning model here"
+    assert resp.json() == {"message: Welcome to my first API ! You can get an inference from"
+    " a machine learning model here"} 
 
 
 def test_lower_50():
     census={
-        'age': 40,
+        'age': 39,
         'workclass': 'State-gov',
         'fnlgt': '77516',
         'education': 'Bachelors',
-        'marital-status': 'Never-Married',
+        'education_num': 13,
+        'marital-status': 'Never-married',
         'occupation': 'Adm-clerical',
         'relationsship': 'Not-in-family',
         'race': 'White',
@@ -39,6 +40,7 @@ def test_higher_50():
         'workclass': 'Self-emp-not-inc',
         'fnlgt': '292175',
         'education': 'Masters',
+        'education_num': 14 ,
         'marital-status': 'Divorced',
         'occupation': 'Exec-managerial',
         'relationsship': 'Unmarried',
