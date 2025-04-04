@@ -13,8 +13,7 @@ def test_root_message():
 
 
 def test_lower_50():
-    census1={
-        'age': 39,
+    census1={'age': 39,
         'workclass': 'State-gov',
         'fnlgt': '77516',
         'education': 'Bachelors',
@@ -27,15 +26,16 @@ def test_lower_50():
         'capital-gain': 2174,
         'capital-loss': 0,
         'hours-per-week': 40,
-        'native-country': 'United-States',
-    }
+        'native-country': 'United-States'}
     resp = client.post("/inference", json=census1)
     assert resp.status_code == 200
     assert resp.json() == {'predicted_salary': '<=50k'}  
 
+
+
+
 def test_higher_50():
-    census2 ={
-        'age': 43,
+    census2 ={'age': 43,
         'workclass': 'Self-emp-not-inc',
         'fnlgt': '292175',
         'education': 'Masters',
@@ -48,8 +48,7 @@ def test_higher_50():
         'capital-gain': 0,
         'capital-loss': 0,
         'hours-per-week': 45,
-        'native-country': 'United-States',
-    }
+        'native-country': 'United-States'}
     resp = client.post("/inference", json=census2)
     assert resp.status_code == 200
     assert resp.json() == {'predicted_salary': '>50k'} 
