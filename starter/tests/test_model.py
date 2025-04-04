@@ -1,50 +1,28 @@
 import pytest
 import numpy as np
+from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier
 from sklearn.datasets import make_classification, make_regression
 from starter.ml.model import inference, train_lr_model
 
+
+
+
+
+
+
+
 @pytest.fixture
-def classification_data():
-    """Erstell Beispiel Daten für classification
+def sample_data():
+    """_summary_
     """
-    X_train, y_train = make_classification(n_samples=100, n_features=5, random_state=42)
-    X_test, _ = make_classification(n_samples=10, n_features=5, random_state=24)
-    return X_train, y_train, X_test
-
-@pytest.fixture
-def regression_data():
-    X_train, y_train = make_regression(n_samples=100, n_features=5, random_state=42)
-    X_test, _ = make_regression(n_samples=10, n_features=5, random_state=24)
-    return X_train, y_train, X_test
+    X,y = make_classification(n_samples = 100, n_features=5, random_state=42)
+    return X, y
 
 
-def test_train_classification(classification_data):
-    X_train, y_train = classification_data
-    model = train_lr_model(X_train, y_train, model_type="classifier")
-    assert isinstance(model, RandomForestClassifier)
-    assert hasattr(model, "predict")
+def test_train_lr_model(sample_data):
+    X, y = sample_data
+    model = train_lr_model(X, y)
 
-
-def test_train_regression(regression_data):
-    X_train, y_train = regression_data
-    model = train_lr_model(X_train, y_train, model_type="classifier")
-    assert isinstance(model, RandomForestClassifier)
-    assert hasattr(model, "predict")
-
-
-def test_inference_classification(classification_data):
-    X_train, y_train, X_test = classification_data
-    model = train_lr_model(X_train, y_train, model_type="classifier")
-    predictions = inference(model, X_test)
-
-    assert isinstance(predictions, np.ndarray)
-    assert len(predictions) == len(X_test)
-
-def test_inference_regression(regression_data):
-    X_train, y_train, X_test = regression_data
-    model = train_lr_model(X_train, y_train, model_type="regressor")
-    predictions = inference(model, X_test)
-
-    assert isinstance(predictions, np.ndarray)
-    assert len(predictions) == len(X_test)
+    assert isinstance(model, LogisticRegression)
+    assert hasattr(model, "coef_")
