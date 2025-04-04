@@ -8,9 +8,9 @@ from starter.train_model import cat_features
 from starter.ml.model import inference
 from joblib import load
 
-lr_model = load('starter/model/lr_model.joblib')
-encoder = load('starter/model/encoder_path.joblib')
-lb = load('starter/model/lb_path.joblib')
+lr_model = load('model/lr_model.joblib')
+encoder = load('model/encoder_path.joblib')
+lb = load('model/lb_path.joblib')
 
 
 class Census_Data(BaseModel):
@@ -27,7 +27,7 @@ class Census_Data(BaseModel):
     capital_gain: int = Field(..., alias='capital-gain')
     capital_loss: int = Field(..., alias='capital-loss')
     hours_per_week: int = Field(..., alias='hours-per-week')
-    native_country: str = Field(..., alias='natie-country')
+    native_country: str = Field(..., alias='nativ-country')
 
 
 
