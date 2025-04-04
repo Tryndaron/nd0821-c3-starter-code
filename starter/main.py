@@ -8,9 +8,9 @@ from starter.train_model import cat_features
 from starter.ml.model import inference
 from joblib import load
 
-lr_model = load('model/lr_model.joblib')
-encoder = load('model/encoder_path.joblib')
-lb = load('model/lb_path.joblib')
+lr_model = load('nd0821-c3-starter-code/starter/modellr_model.joblib')
+encoder = load('nd0821-c3-starter-code/starter/modelencoder_path.joblib')
+lb = load('nd0821-c3-starter-code/starter/model/lb_path.joblib')
 
 
 class Census_Data(BaseModel):
