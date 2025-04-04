@@ -9,7 +9,8 @@ client = TestClient(app)
 def test_root_message():
     resp = client.get('/')
     assert resp.status_code == 200
-    assert resp.json() == 'message: Welcome to my first API ! You can get an inference from a machine learning model here'
+    assert resp.json() == "message: Welcome to my first API ! You can get an inference from"
+    " a machine learning model here"
 
 
 def test_lower_50():
@@ -28,7 +29,7 @@ def test_lower_50():
         'hours-per-week': 40,
         'native-country': 'United-States',
     }
-    resp = client.post('/inference', json=census)
+    resp = client.post("/inference", json=census)
     assert resp.status_code == 200
     assert resp.json() == {'predicted_salary': '<=50k'}  
 
@@ -48,6 +49,6 @@ def test_higher_50():
         'hours-per-week': 45,
         'native-country': 'United-States',
     }
-    resp = client.post('/inference', json=census)
+    resp = client.post("/inference", json=census)
     assert resp.status_code == 200
     assert resp.json() == {'predicted_salary': '>50k'} 
