@@ -1,9 +1,11 @@
 # Put the code for your API here.
 from fastapi import FastAPI
 import pandas as pd
+import sklearn.preprocessing
 from pydantic import BaseModel
 from starter.ml.data import process_data
 from starter.train_model import cat_features
+from starter.ml.model import inference
 from joblib import load
 
 lr_model = load('starter/model/lr_model.joblib')
@@ -44,9 +46,9 @@ async def model_inference(census: Census_Data):
     input_data, _, _, _ = process_data(Census_Data_df,  cat_features, label=None
                                        , training=False, encoder=encoder, lb=lb)
     
-    pred = lr_model.inference(lr_model, input_data)
+    pred = inference(lr_model, input_data)
     pred_class = lb.inverse_transform(pred)[0]
-    resp ={'predicted_salary': pred_class}
+    resp = {'predicted_salary': pred_class}
     return resp  
 
 
