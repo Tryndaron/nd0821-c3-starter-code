@@ -6,9 +6,9 @@ from starter.ml.data import process_data
 from starter.train_model import cat_features
 from joblib import load
 
-lr_model = load('./model/lr_model.joblib')
-encoder = load('./model/encoder_path.joblib')
-lb = load('./model/lb_path.joblib')
+lr_model = load('.model/lr_model.joblib')
+encoder = load('.model/encoder_path.joblib')
+lb = load('.model/lb_path.joblib')
 
 
 class Census_Data(BaseModel):
