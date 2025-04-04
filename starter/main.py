@@ -35,8 +35,7 @@ app = FastAPI()
 
 @app.get("/")
 async def root():
-    return {"message: Welcome to my first API ! You can get an inference from"
-    " a machine learning model here"} 
+    return "This is my first API!" 
 
 
 @app.post("/inference")
