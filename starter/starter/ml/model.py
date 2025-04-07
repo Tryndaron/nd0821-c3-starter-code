@@ -4,7 +4,7 @@ from .data import process_data
 
 
 # Optional: implement hyperparameter tuning.
-def train_lr_model(X_train, y_train, max_iter=100):
+def train_lr_model(X_train, y_train, max_iter=1000):
     """
     Trains a machine learning model and returns it.
 
