@@ -8,6 +8,26 @@ from starter.train_model import cat_features
 from starter.ml.model import inference
 from joblib import load
 
+
+# Load model and label binarizer
+model_path = 'starter/model/lr_model.pkl'
+lb_path = 'starter/model/lb_path.pkl'
+
+with open(model_path, "rb") as model_file:
+    model = pickle.load(model_file)
+
+with open(lb_path, "rb") as lb_file:
+    lb = pickle.load(lb_file)
+
+with open("model/encoder_path.pkl", "rb") as encoder_file:
+    encoder = pickle.load(encoder_file)
+
+
+
+
+
+
+
 lr_model = load('starter/model/lr_model.joblib')
 encoder = load('starter/model/encoder_path.joblib')
 lb = load('starter/model/lb_path.joblib')
@@ -101,7 +121,10 @@ def predict(data: Census_Data):
 
 
 
-
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
+    # gunicorn -k uvicorn.workers.UvicornWorker main:app --bind 0.0.0.0:10000
 
 
 

@@ -5,9 +5,9 @@ from sklearn.model_selection import train_test_split
 # Add the necessary imports for the starter code.
 import pandas as pd
 import joblib
-from .ml.model import train_lr_model, compute_model_performance_on_categorical_data
-from .ml.data import process_data
-
+from ml.model import train_lr_model, compute_model_performance_on_categorical_data
+from ml.data import process_data
+import pickle
 
 # Add code to load in the data.
 
@@ -47,14 +47,23 @@ def train_save_model():
     lr_model = train_lr_model(X_train, y_train)
 
     #save model and metrics
-    model_path = '/home/roggenlanda/Schreibtisch/projects/Fortbildungen/Machine_learning_devOps/Kurs4_final_project/nd0821-c3-starter-code/starter/model/lr_model.joblib'
-    encoder_path = '/home/roggenlanda/Schreibtisch/projects/Fortbildungen/Machine_learning_devOps/Kurs4_final_project/nd0821-c3-starter-code/starter/model/encoder_path.joblib'
-    lb_path = '/home/roggenlanda/Schreibtisch/projects/Fortbildungen/Machine_learning_devOps/Kurs4_final_project/nd0821-c3-starter-code/starter/model/lb_path.joblib'
+    model_path = '/home/roggenlanda/Schreibtisch/projects/Fortbildungen/Machine_learning_devOps/Kurs4_final_project/nd0821-c3-starter-code/starter/model/lr_model.pkl'
+    encoder_path = '/home/roggenlanda/Schreibtisch/projects/Fortbildungen/Machine_learning_devOps/Kurs4_final_project/nd0821-c3-starter-code/starter/model/encoder_path.pkl'
+    lb_path = '/home/roggenlanda/Schreibtisch/projects/Fortbildungen/Machine_learning_devOps/Kurs4_final_project/nd0821-c3-starter-code/starter/model/lb_path.pkl'
+    with open(model_path, "wb") as model_file:
+        pickle.dump(lr_model, model_file)
+
+    with open(lb_path, "wb") as lb_file:
+        pickle.dump(lb, lb_file)
+
+    with open(encoder_path, "wb") as encoder_file:
+        pickle.dump(encoder, encoder_file)
+    
     y_pred = lr_model.predict(X_test)
     compute_model_performance_on_categorical_data(cat_features, lr_model, y_test, y_pred, test, encoder, lb)
-    joblib.dump(lr_model, model_path)
-    joblib.dump(encoder,encoder_path)
-    joblib.dump(lr_model, lb_path)
+    #joblib.dump(lr_model, model_path)
+    #joblib.dump(encoder,encoder_path)
+    #joblib.dump(lr_model, lb_path)
     print(f"Modell wurde erfolgreich gespeichert unter {model_path}")
 
 
