@@ -60,16 +60,41 @@ async def root():
     return "This is my first API!" 
 
 
-@app.post("/inference")
-async def model_inference(census: Census_Data):
-    Census_Data_df = pd.DataFrame(census.dict(by_alias=True), index=[0] )
-    input_data, _, _, _ = process_data(Census_Data_df,  cat_features, label=None
-                                       , training=False, encoder=encoder, lb=lb)
-    
-    pred = inference(lr_model, input_data)
-    pred_class = lb.inverse_transform(pred)
-    resp = {"predicted_salary": pred_class.to_list()}
-    return resp 
+@app.post("/prediction")
+def predict(data: Census_Data):
+    # Convert list of DataInput objects to DataFrame
+    input_df = pd.DataFrame([{"age": data.age,
+                        "workclass": data.workclass,
+                        "fnlgt": data.fnlgt,
+                        "education": data.education,
+                        "education-num": data.education_num,
+                        "marital-status": data.marital_status,
+                        "occupation": data.occupation,
+                        "relationship": data.relationship,
+                        "race": data.race,
+                        "sex": data.sex,
+                        "capital-gain": data.capital_gain,
+                        "capital-loss": data.capital_loss,
+                        "hours-per-week": data.hours_per_week,
+                        "native-country": data.native_country}])
+
+
+    # Process input data
+    cat_features = [
+        "workclass", "education", "marital-status", "occupation",
+        "relationship", "race", "sex", "native-country"
+    ]
+    X, _, _, _ = process_data(
+        input_df, categorical_features=cat_features, label=None, training=False, encoder=encoder, lb=lb
+    )
+
+    # Perform inference
+    predictions = inference(lr_model, X)
+    # Convert predictions back to original labels
+    preds = lb.inverse_transform(predictions)
+
+    # Return predictions
+    return {"predictions": preds.tolist()}
 
 
 
