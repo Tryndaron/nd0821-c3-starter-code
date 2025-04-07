@@ -15,7 +15,7 @@ model_path = 'starter/model/lr_model.pkl'
 lb_path = 'starter/model/lb_path.pkl'
 
 with open(model_path, "rb") as model_file:
-    model = pickle.load(model_file)
+    lr_model = pickle.load(model_file)
 
 with open(lb_path, "rb") as lb_file:
     lb = pickle.load(lb_file)
@@ -29,9 +29,9 @@ with open("model/encoder_path.pkl", "rb") as encoder_file:
 
 
 
-lr_model = load('starter/model/lr_model.joblib')
+""" lr_model = load('starter/model/lr_model.joblib')
 encoder = load('starter/model/encoder_path.joblib')
-lb = load('starter/model/lb_path.joblib')
+lb = load('starter/model/lb_path.joblib') """
 
 
 class Census_Data(BaseModel):
