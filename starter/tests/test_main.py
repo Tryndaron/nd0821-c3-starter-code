@@ -15,20 +15,23 @@ def test_root_message():
 
 
 def test_lower_50k():
-    person = {'age': 39,
-              'workclass': 'State-gov',
-              'fnlgt': 77516,
-              'education': 'Bachelors',
-              'education-num': 13,
-              'marital-status': 'Never-married',
-              'occupation': 'Adm-clerical',
-              'relationship': 'Not-in-family',
-              'race': 'White',
-              'sex': 'Male',
-              'capital-gain': 2174,
-              'capital-loss': 0,
-              'hours-per-week': 40,
-              'native-country': 'United-States'}
+    person = {""
+    "age": 0,
+    "workclass": "string",
+    "fnlgt": 0,
+    "education": "string",
+    "education-num": 0,
+    "marital-status": "string",
+    "occupation": "string",
+    "relationship": "string",
+    "race": "string",
+    "sex": "string",
+    "capital-gain": 0,
+    "capital-loss": 0,
+    "hours-per-week": 0,
+    "native-country": "string"
+    ""
+    }
     resp = client.post("/prediction", json=person)
     assert resp.status_code == 200
     print(resp.json())

@@ -4,7 +4,7 @@ from .data import process_data
 
 
 # Optional: implement hyperparameter tuning.
-def train_lr_model(X_train, y_train, max_iter=1000):
+def train_lr_model(X_train, y_train, max_iter=100):
     """
     Trains a machine learning model and returns it.
 
@@ -30,14 +30,7 @@ def train_lr_model(X_train, y_train, max_iter=1000):
 
 
 
-    """ if model_type=="classifier":
-        model = RandomForestClassifier(n_estimators=n_estimators, random_state=random_state)
-    elif model_type == "regressor":
-        model=RandomForestRegressor(n_estimators=n_estimators, random_state=random_state)
-    else:
-        raise ValueError("Ungültiger model_type. Wähle 'classifier' oder 'regressor'.")
-    model.fit(X_train, y_train)
-    return model """
+    
 
 
 def compute_model_metrics(y, preds):
@@ -84,9 +77,9 @@ def compute_model_performance_on_categorical_data(categorical_features, model, y
                 slice_df, categorical_features=categorical_features, label='salary',
                 training=False, encoder=encoder, lb=lb)
             y_slice_pred = model.predict(X_slice)
-            precision, recal, fbeta = compute_model_metrics(y_slice, y_slice_pred)
+            precision, recall, fbeta = compute_model_metrics(y_slice, y_slice_pred)
             metrics.append(f"Category feature: {category},  variation: {category_variation}, Precision: {precision}, Recall:{recall}, Fbeta: {fbeta}")
-    
+    return metrics
             
               
 

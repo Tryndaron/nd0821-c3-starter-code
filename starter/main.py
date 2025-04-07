@@ -17,21 +17,21 @@ encoder = load('starter/model/encoder_path.joblib')
 lb = load('starter/model/lb_path.joblib') """
 
 
-class DataInput(BaseModel):
-    age: int = Field(..., example=39)
-    workclass: str = Field(..., example="State-gov")
-    fnlgt: int = Field(..., example=77516)
-    education: str = Field(..., example="Bachelors")
-    education_num: int = Field(..., example=13)
-    marital_status: str = Field(..., example="Never-married")
-    occupation: str = Field(..., example="Adm-clerical")
-    relationship: str = Field(..., example="Not-in-family")
-    race: str = Field(..., example="White")
-    sex: str = Field(..., example="Male")
-    capital_gain: int = Field(..., example=2174)
-    capital_loss: int = Field(..., example=0)
-    hours_per_week: int = Field(..., example=40)
-    native_country: str = Field(..., example="United-States")
+class Person(BaseModel):
+    age: int
+    workclass: str
+    fnlgt: int
+    education: str
+    education_num: int = Field(..., alias='education-num')
+    marital_status: str = Field(..., alias='marital-status')
+    occupation: str
+    relationship: str
+    race: str
+    sex: str
+    capital_gain: int = Field(..., alias='capital-gain')
+    capital_loss: int = Field(..., alias='capital-loss')
+    hours_per_week: int = Field(..., alias='hours-per-week')
+    native_country: str = Field(..., alias='native-country')
 
 
 
@@ -63,8 +63,8 @@ async def root():
     return "This is my first API!" 
 
 
-@app.post("/prediction")
-def predict(data: DataInput):
+@app.post("/predict")
+def predict(data:Person):
     # Convert list of DataInput objects to DataFrame
     input_df = pd.DataFrame([{"age": data.age,
                         "workclass": data.workclass,
