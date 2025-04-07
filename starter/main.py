@@ -7,6 +7,7 @@ from starter.ml.data import process_data
 from starter.train_model import cat_features
 from starter.ml.model import inference
 from joblib import load
+import pickle
 
 
 # Load model and label binarizer
