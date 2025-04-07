@@ -37,6 +37,29 @@ def test_lower_50k():
     assert resp.json() == {"predictions":["<=50K"] }  
 
 
+def test_higher_50k():
+    person = {""
+    'age': 43,
+    'workclass': 'Self-emp-not-inc',
+    'fnlgt': '292175',
+    'education': 'Masters',
+    'education_num': 14 ,
+    'marital-status': 'Divorced',
+    'occupation': 'Exec-managerial',
+    'relationsship': 'Unmarried',
+    'race': 'White',
+    'sex': 'Female',
+    'capital-gain': 0,
+    'capital-loss': 0,
+    'hours-per-week': 45,
+    'native-country': 'United-States'
+    ""
+    }
+    resp = client.post("/predict", json=person)
+    assert resp.status_code == 200
+    assert resp.json() == {"predictions":[">50K"] }
+
+
 
 
 """ def test_higher_50():
