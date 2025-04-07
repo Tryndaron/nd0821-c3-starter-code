@@ -31,7 +31,7 @@ def test_lower_50k():
               'native-country': 'United-States'}
     resp = client.post('/predict_salary', json=person)
     assert resp.status_code == 200
-    assert resp.json() == {'predicted_salary': '<=50K'}  
+    assert resp.json()["predicted_salary"] == ["<=50K"]  
 
 
 
