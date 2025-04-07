@@ -34,7 +34,7 @@ def test_lower_50k():
     }
     resp = client.post("/predict", json=person)
     assert resp.status_code == 200
-    assert resp.json() == {"predictions": "<=50k"}  
+    assert resp.json() == {"predictions":["<=50k"] }  
 
 
 
