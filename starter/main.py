@@ -11,8 +11,8 @@ import pickle
 
 
 # Load model and label binarizer
-model_path = 'starter/model/lr_model.pkl'
-lb_path = 'starter/model/lb_path.pkl'
+model_path = 'nd0821-c3-starter-code/starter/model/lr_model.pkl'
+lb_path = 'nd0821-c3-starter-code/starter/model/lb_path.pkl'
 
 with open(model_path, "rb") as model_file:
     lr_model = pickle.load(model_file)
@@ -20,7 +20,7 @@ with open(model_path, "rb") as model_file:
 with open(lb_path, "rb") as lb_file:
     lb = pickle.load(lb_file)
 
-with open("model/encoder_path.pkl", "rb") as encoder_file:
+with open("nd0821-c3-starter-code/starter/model/encoder_path.pkl", "rb") as encoder_file:
     encoder = pickle.load(encoder_file)
 
 
