@@ -39,22 +39,22 @@ def test_lower_50k():
 
 def test_higher_50k():
    person = {""
-  "age": 0,
-  "workclass": "string",
-  "fnlgt": 0,
-  "education": "string",
-  "education-num": 0,
-  "marital-status": "string",
-  "occupation": "string",
-  "relationship": "string",
-  "race": "string",
-  "sex": "string",
-  "capital-gain": 0,
-  "capital-loss": 0,
-  "hours-per-week": 0,
-  "native-country": "string"
-  ""
-}
+    "age": 0,
+    "workclass": "string",
+    "fnlgt": 0,
+    "education": "string",
+    "education-num": 0,
+    "marital-status": "string",
+    "occupation": "string",
+    "relationship": "string",
+    "race": "string",
+    "sex": "string",
+    "capital-gain": 0,
+    "capital-loss": 0,
+    "hours-per-week": 0,
+    "native-country": "string"
+    ""
+    }
     resp = client.post("/predict", json=person)
     assert resp.status_code == 200
     assert resp.json() == {"predictions":[">50K"] }
