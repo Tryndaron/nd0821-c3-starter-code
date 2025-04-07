@@ -14,23 +14,22 @@ def test_root_message():
 
 
 
-def test_model_inference_lower_50():
-    census1 = {'age': 39,
-        'workclass': 'State-gov',
-        'fnlgt': '77516',
-        'education': 'Bachelors',
-        'education_num': 13,
-        'marital-status': 'Never-married',
-        'occupation': 'Adm-clerical',
-        'relationsship': 'Not-in-family',
-        'race': 'White',
-        'sex': 'Male',
-        'capital-gain': 2174,
-        'capital-loss': 0,
-        'hours-per-week': 40,
-        'native-country': 'United-States'}
-
-    resp = client.post("/inference", json=census1)
+def test_lower_50k():
+    person = {'age': 39,
+              'workclass': 'State-gov',
+              'fnlgt': 77516,
+              'education': 'Bachelors',
+              'education-num': 13,
+              'marital-status': 'Never-married',
+              'occupation': 'Adm-clerical',
+              'relationship': 'Not-in-family',
+              'race': 'White',
+              'sex': 'Male',
+              'capital-gain': 2174,
+              'capital-loss': 0,
+              'hours-per-week': 40,
+              'native-country': 'United-States'}
+    resp = client.post('/predict_salary', json=person)
     assert resp.status_code == 200
     assert resp.json() == {'predicted_salary': '<=50K'}  
 
