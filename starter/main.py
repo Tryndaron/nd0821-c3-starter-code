@@ -67,9 +67,9 @@ async def model_inference(census: Census_Data):
                                        , training=False, encoder=encoder, lb=lb)
     
     pred = inference(lr_model, input_data)
-    pred_class = lb.inverse_transform(pred)[0]
-    resp = {'predicted_salary': pred_class}
-    return resp  
+    #pred_class = lb.inverse_transform(pred)[0]
+    #resp = {'predicted_salary': pred_class}
+    return pred  
 
 
 

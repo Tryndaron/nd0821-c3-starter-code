@@ -12,7 +12,9 @@ def test_root_message():
     assert resp.json() == "This is my first API!"
 
 
-""" def test_model_inference_lower_50():
+
+
+def test_model_inference_lower_50():
     census1 = {'age': 39,
         'workclass': 'State-gov',
         'fnlgt': '77516',
@@ -27,9 +29,10 @@ def test_root_message():
         'capital-loss': 0,
         'hours-per-week': 40,
         'native-country': 'United-States'}
+
     resp = client.post("/inference", json=census1)
     assert resp.status_code == 200
-    assert resp.json() == {'predicted_salary': '<=50K'}  """ 
+    assert resp.json() == {'predicted_salary': '<=50K'}  
 
 
 
