@@ -29,7 +29,7 @@ def test_lower_50k():
               'capital-loss': 0,
               'hours-per-week': 40,
               'native-country': 'United-States'}
-    resp = client.post('/predict_salary', json=person)
+    resp = client.post('/prediction', json=person)
     assert resp.status_code == 200
     assert resp.json()["predicted_salary"] == ["<=50K"]  
 
