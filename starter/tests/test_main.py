@@ -31,6 +31,7 @@ def test_lower_50k():
               'native-country': 'United-States'}
     resp = client.post("/prediction", json=person)
     assert resp.status_code == 200
+    print(resp.json())
     assert resp.json() == {"predictions": "<=50k"}  
 
 
