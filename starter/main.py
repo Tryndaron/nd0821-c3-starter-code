@@ -61,7 +61,7 @@ app = FastAPI()
 
 
 # Load model and label binarizer
-model_path = "nd0821-c3-starter-code/starter/model/lr_model.pkl"
+model_path = "starter/model/lr_model.pkl"
 lb_path = "/nd0821-c3-starter-code/starter/model/lb_path.pkl"
 
 with open(model_path, "rb") as model_file:
