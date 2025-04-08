@@ -57,7 +57,7 @@ def test_higher_50k():
         }
     resp = client.post("/predict", json=person)
     assert resp.status_code == 200
-    assert type(resp.json()) ==  {"predictions":">50K"}
+    assert resp.json() ==  {"predictions":">50K"}
 
 
 
