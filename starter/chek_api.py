@@ -9,18 +9,18 @@ url = "http://127.0.0.1:8000/predict"
 # Sample data for inference
 person = {""
         "age": 52,
-        "workclass": "Self-emp-not-inc",
-        "fnlgt": 209642,
+        "workclass": "Self-emp-inc",
+        "fnlgt": 287927,
         "education": "HS-grad",
         "education-num": 9,
         "marital-status": "Married-civ-spouse",
         "occupation": "Exec-managerial",
-        "relationship": "Husband",
+        "relationship": "Wife",
         "race": "White",
-        "sex": "Male",
-        "capital-gain": 0,
+        "sex": "Female",
+        "capital-gain": 15024,
         "capital-loss": 0,
-        "hours-per-week": 45,
+        "hours-per-week": 40,
         "native-country": "United-states"
         ""
         }
@@ -29,6 +29,6 @@ person = {""
 response = requests.post(url, json=person)
 if response.status_code == 200:
     # Print the predictions
-    print("Predictions:", type(response.json()))
+    print("Predictions:", response.json())
 else:
     print(f"Request failed with status code {response.json()}")
