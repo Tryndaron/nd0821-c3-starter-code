@@ -16,6 +16,29 @@ def test_root_message():
 
 def test_lower_50k():
     person = {""
+        "age": 43,
+        "workclass": "Self-emp-not-inc",
+        "fnlgt": 292175,
+        "education": "Masters",
+        "education-num": 9,
+        "marital-status": "Married-civ-spouse",
+        "occupation": "Exec-managerial",
+        "relationship": "Husband",
+        "race": "White",
+        "sex": "Male",
+        "capital-gain": 0,
+        "capital-loss": 0,
+        "hours-per-week": 45,
+        "native-country": "United-states"
+        ""
+        }
+    resp = client.post("/predict", json=person)
+    assert resp.status_code == 200
+    assert resp.json() == {"predictions":"<=50K" }  
+
+
+def test_higher_50k():  
+    person = {""
         "age": 52,
         "workclass": "Self-emp-inc",
         "fnlgt": 287927,
@@ -34,30 +57,7 @@ def test_lower_50k():
         }
     resp = client.post("/predict", json=person)
     assert resp.status_code == 200
-    assert resp.json() == {"predictions": "<=50K" }  
-
-
-def test_higher_50k():  
-    person = {""
-        "age": 43,
-        "workclass": "Self-emp-not-inc",
-        "fnlgt": 292175,
-        "education": "Masters",
-        "education-num": 0,
-        "marital-status": "Divorced",
-        "occupation": "Exec-managerial",
-        "relationship": "Unmarried",
-        "race": "White",
-        "sex": "Female",
-        "capital-gain": 0,
-        "capital-loss": 0,
-        "hours-per-week": 45,
-        "native-country": "United-states"
-        ""
-        }
-    resp = client.post("/predict", json=person)
-    assert resp.status_code == 200
-    assert type(resp.json()) ==  dict      #{"predictions":[">50K"]}
+    assert type(resp.json()) ==  {"predictions":">50K"}
 
 
 

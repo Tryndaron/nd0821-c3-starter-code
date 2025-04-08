@@ -8,19 +8,19 @@ url = "http://127.0.0.1:8000/predict"
 
 # Sample data for inference
 person = {""
-        "age": 52,
-        "workclass": "Self-emp-inc",
-        "fnlgt": 287927,
-        "education": "HS-grad",
+        "age": 43,
+        "workclass": "Self-emp-not-inc",
+        "fnlgt": 292175,
+        "education": "Masters",
         "education-num": 9,
         "marital-status": "Married-civ-spouse",
         "occupation": "Exec-managerial",
-        "relationship": "Wife",
+        "relationship": "Husband",
         "race": "White",
-        "sex": "Female",
-        "capital-gain": 15024,
+        "sex": "Male",
+        "capital-gain": 0,
         "capital-loss": 0,
-        "hours-per-week": 40,
+        "hours-per-week": 45,
         "native-country": "United-states"
         ""
         }
