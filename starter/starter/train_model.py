@@ -5,8 +5,8 @@ from sklearn.model_selection import train_test_split
 # Add the necessary imports for the starter code.
 import pandas as pd
 import joblib
-from ml.model import train_lr_model, compute_model_performance_on_categorical_data
-from ml.data import process_data
+from .ml.model import train_lr_model, compute_model_performance_on_categorical_data
+from .ml.data import process_data
 import pickle
 
 # Add code to load in the data.

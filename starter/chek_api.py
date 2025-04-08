@@ -29,6 +29,6 @@ person = {""
 response = requests.post(url, json=person)
 if response.status_code == 200:
     # Print the predictions
-    print("Predictions:", response.json())
+    print("Predictions:", type(response.json()))
 else:
     print(f"Request failed with status code {response.json()}")
