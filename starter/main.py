@@ -61,8 +61,8 @@ app = FastAPI()
 
 
 # Load model and label binarizer
-model_path = "starter/model/lr_model.pkl"
-lb_path = "starter/model/lb_path.pkl"
+model_path = "model/lr_model.pkl"
+lb_path = "model/lb_path.pkl"
 
 with open(model_path, "rb") as model_file:
     lr_model = pickle.load(model_file)
@@ -70,7 +70,7 @@ with open(model_path, "rb") as model_file:
 with open(lb_path, "rb") as lb_file:
     lb = pickle.load(lb_file)
 
-with open("starter/model/encoder_path.pkl", "rb") as encoder_file:
+with open("model/encoder_path.pkl", "rb") as encoder_file:
     encoder = pickle.load(encoder_file)
 
 
@@ -103,8 +103,8 @@ def predict(data:Person):
     person_df = pd.DataFrame(data.dict(by_alias=True), index=[0])
 
     # Load model and label binarizer
-    model_path = "starter/model/lr_model.pkl"
-    lb_path = "starter/model/lb_path.pkl"
+    model_path = "model/lr_model.pkl"
+    lb_path = "model/lb_path.pkl"
 
     with open(model_path, "rb") as model_file:
         lr_model = pickle.load(model_file)
@@ -112,7 +112,7 @@ def predict(data:Person):
     with open(lb_path, "rb") as lb_file:
         lb = pickle.load(lb_file)
 
-    with open("starter/model/encoder_path.pkl", "rb") as encoder_file:
+    with open("model/encoder_path.pkl", "rb") as encoder_file:
         encoder = pickle.load(encoder_file)
 
     # Process input data
