@@ -18,7 +18,10 @@ For evaluation the test dataset, which consist of 20% of the entire dataset, got
 
 ## Metrics
 _Please include the metrics used and your model's performance on those metrics._
+THe Metrics used are Precision, Recall and Fbeta. The performance can be seen in src/model/slice_output.txt 
 
 ## Ethical Considerations
+There are many features like sex, native-country and race, that should not be used in cases, where equal oppurtunity is a big issue.
 
 ## Caveats and Recommendations
+unbalanced dataset

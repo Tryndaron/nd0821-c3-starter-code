@@ -1,22 +1,12 @@
 # Script to train machine learning model.
 
 from sklearn.model_selection import train_test_split
-
-# Add the necessary imports for the starter code.
 import pandas as pd
 import joblib
 from .ml.model import train_lr_model, compute_model_performance_on_categorical_data
 from .ml.data import process_data
 import pickle
 
-# Add code to load in the data.
-
-#df = pd.read_csv("../data/census.csv")
-
-
-
-# Optional enhancement, use K-fold cross validation instead of a train-test split.
-#train, test = train_test_split(df, test_size=0.20)
 
 cat_features = [
     "workclass",
@@ -62,9 +52,6 @@ def train_save_model():
     y_pred = lr_model.predict(X_test)
     print(y_pred)
     compute_model_performance_on_categorical_data(cat_features, lr_model, y_test, y_pred, test, encoder, lb)
-    #joblib.dump(lr_model, model_path)
-    #joblib.dump(encoder,encoder_path)
-    #joblib.dump(lr_model, lb_path)
     print(f"Modell wurde erfolgreich gespeichert unter {model_path}")
 
 

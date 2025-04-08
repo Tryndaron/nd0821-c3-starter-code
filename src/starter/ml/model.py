@@ -84,9 +84,6 @@ def compute_model_performance_on_categorical_data(cat_features, model, y_test, y
                                                               y_slice_pred)
             metrics.append(f"Category feature: {cat}, Category variation: {cat_variation}, Precision: {precision}, Recall: {recall}, Fbeta: {fbeta}")
     with open(SLICE_OUTPUT, 'w') as file:
-        # Credits to Ravikiran A S for
-        # transfering the list to a string, see here:
-        # https://www.simplilearn.com/tutorials/python-tutorial/list-to-string-in-python
         file.write('\n'.join(metrics))
     
             
