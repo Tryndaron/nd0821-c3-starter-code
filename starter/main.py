@@ -33,6 +33,26 @@ class Person(BaseModel):
     hours_per_week: int = Field(..., alias='hours-per-week')
     native_country: str = Field(..., alias='native-country')
 
+    class Config:
+        schema_extra = {
+            "example": {
+                'age': 39,
+                'workclass': 'State-gov',
+                'fnlgt': 77516,
+                'education': 'Bachelors',
+                'education-num': 13,
+                'marital-status': 'Never-married',
+                'occupation': 'Adm-clerical',
+                'relationship': 'Not-in-family',
+                'race': 'White',
+                'sex': 'Male',
+                'capital-gain': 2174,
+                'capital-loss': 0,
+                'hours-per-week': 40,
+                'native-country': 'United-States'
+            }
+        }
+
 
 
 
@@ -66,7 +86,7 @@ async def root():
 @app.post("/predict")
 def predict(data:Person):
     # Convert list of DataInput objects to DataFrame
-    input_df = pd.DataFrame([{"age": data.age,
+    """ input_df = pd.DataFrame([{"age": data.age,
                         "workclass": data.workclass,
                         "fnlgt": data.fnlgt,
                         "education": data.education,
@@ -79,7 +99,21 @@ def predict(data:Person):
                         "capital-gain": data.capital_gain,
                         "capital-loss": data.capital_loss,
                         "hours-per-week": data.hours_per_week,
-                        "native-country": data.native_country}])
+                        "native-country": data.native_country}]) """
+    person_df = pd.DataFrame(data.dict(by_alias=True), index=[0])
+
+    # Load model and label binarizer
+    model_path = "starter/model/lr_model.pkl"
+    lb_path = "starter/model/lb_path.pkl"
+
+    with open(model_path, "rb") as model_file:
+        lr_model = pickle.load(model_file)
+
+    with open(lb_path, "rb") as lb_file:
+        lb = pickle.load(lb_file)
+
+    with open("starter/model/encoder_path.pkl", "rb") as encoder_file:
+        encoder = pickle.load(encoder_file)
 
     # Process input data
     cat_features = [
@@ -87,13 +121,13 @@ def predict(data:Person):
         "relationship", "race", "sex", "native-country"
     ]
     X, _, _, _ = process_data(
-        input_df, categorical_features=cat_features, label=None, training=False, encoder=encoder, lb=lb
+        person_df, categorical_features=cat_features, label=None, training=False, encoder=encoder, lb=lb
     )
 
     # Perform inference
     predictions = inference(lr_model, X)
     # Convert predictions back to original labels
-    preds = lb.inverse_transform(predictions)
+    preds = lb.inverse_transform(predictions)[0] 
 
     # Return predictions
     return {"predictions": preds.tolist()}

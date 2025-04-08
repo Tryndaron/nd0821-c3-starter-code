@@ -5,8 +5,8 @@ from sklearn.model_selection import train_test_split
 # Add the necessary imports for the starter code.
 import pandas as pd
 import joblib
-from .ml.model import train_lr_model, compute_model_performance_on_categorical_data
-from .ml.data import process_data
+from ml.model import train_lr_model, compute_model_performance_on_categorical_data
+from ml.data import process_data
 import pickle
 
 # Add code to load in the data.
@@ -39,7 +39,7 @@ def train_save_model():
     data_file_path = '../data/census.csv'
     data = pd.read_csv(data_file_path)
     print(data)
-    train, test = train_test_split(data, test_size=0.2, stratify= data['salary'])
+    train, test = train_test_split(data, test_size=0.20, stratify= data['salary'])
     X_train, y_train, encoder, lb = process_data(train, categorical_features=cat_features, label='salary', training=True)
     X_test, y_test, _, _ = process_data(test, categorical_features=cat_features, label='salary', training=False, encoder=encoder, lb=lb)
     
@@ -60,6 +60,7 @@ def train_save_model():
         pickle.dump(encoder, encoder_file)
     
     y_pred = lr_model.predict(X_test)
+    print(y_pred)
     compute_model_performance_on_categorical_data(cat_features, lr_model, y_test, y_pred, test, encoder, lb)
     #joblib.dump(lr_model, model_path)
     #joblib.dump(encoder,encoder_path)

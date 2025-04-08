@@ -3,8 +3,12 @@ from sklearn.linear_model import LogisticRegression
 from .data import process_data
 
 
+SLICE_OUTPUT = "/home/roggenlanda/Schreibtisch/projects/Fortbildungen/Machine_learning_devOps/Kurs4_final_project/nd0821-c3-starter-code/starter/model/slice_output.txt"
+
+
+
 # Optional: implement hyperparameter tuning.
-def train_lr_model(X_train, y_train, max_iter=1000):
+def train_lr_model(X_train, y_train, max_iter=10000):
     """
     Trains a machine learning model and returns it.
 
@@ -55,7 +59,7 @@ def compute_model_metrics(y, preds):
     return precision, recall, fbeta
 
 
-def compute_model_performance_on_categorical_data(categorical_features, model, y_test, y_pred, test_data, encoder, lb):
+def compute_model_performance_on_categorical_data(cat_features, model, y_test, y_pred, test_data, encoder, lb):
     """_summary_
 
     Args:
@@ -68,18 +72,23 @@ def compute_model_performance_on_categorical_data(categorical_features, model, y
         lb (_type_): _description_
     """
     precision, recall, fbeta = compute_model_metrics(y_test, y_pred)
-
-    metrics =[]
-    for category in  categorical_features:
-        for category_variation in test_data[category].unique():
-            slice_df = test_data[test_data[category] == category_variation]
+    metrics = []
+    for cat in cat_features:
+        for cat_variation in test_data[cat].unique():
+            slice_df = test_data[test_data[cat] == cat_variation]
             X_slice, y_slice, _, _ = process_data(
-                slice_df, categorical_features=categorical_features, label='salary',
-                training=False, encoder=encoder, lb=lb)
+                slice_df, categorical_features=cat_features,
+                label='salary', training=False, encoder=encoder, lb=lb)
             y_slice_pred = model.predict(X_slice)
-            precision, recall, fbeta = compute_model_metrics(y_slice, y_slice_pred)
-            metrics.append(f"Category feature: {category},  variation: {category_variation}, Precision: {precision}, Recall:{recall}, Fbeta: {fbeta}")
-    return metrics
+            precision, recall, fbeta = compute_model_metrics(y_slice,
+                                                              y_slice_pred)
+            metrics.append(f"Category feature: {cat}, Category variation: {cat_variation}, Precision: {precision}, Recall: {recall}, Fbeta: {fbeta}")
+    with open(SLICE_OUTPUT, 'w') as file:
+        # Credits to Ravikiran A S for
+        # transfering the list to a string, see here:
+        # https://www.simplilearn.com/tutorials/python-tutorial/list-to-string-in-python
+        file.write('\n'.join(metrics))
+    
             
               
 
