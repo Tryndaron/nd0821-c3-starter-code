@@ -24,7 +24,7 @@ def sample_data():
 
 def test_compute_model_metrics():
     data = pd.read_csv("src/data/census.csv")
-    train, test = train_test_split(data, test_size=0.30 , stratify=data['salary']  )
+    train, test = train_test_split(data, test_size=0.20 , stratify=data['salary']  )
 
     X_train, y_train, encoder, lb = process_data(
         train, categorical_features=cat_features, label="salary", training=True)
